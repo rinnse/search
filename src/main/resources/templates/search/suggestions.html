@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>연관 키워드 검색</title>
+</head>
+<body>
+<ul id="suggestionsList"> <!-- 검색어 제안 목록을 표시할 엘리먼트 -->
+    <li th:each="suggestion : ${suggestions}">
+        <p th:text="${suggestion.name}"></p> <!-- 식당 명 (name) 표시 -->
+        <p th:text="${suggestion/category}"></p>  <!-- category 표시 -->
+    </li>
+</ul>
+</body>
+</html>

@@ -1,13 +1,13 @@
 package com.ex.search.Controller;
 
-import com.ex.search.Repository.SearchRepository;
-import com.ex.search.domain.SearchEntity;
+import com.ex.search.Service.SearchService;
+import com.ex.search.domain.Search;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -15,18 +15,28 @@ import java.util.List;
 @RequestMapping("/search")
 public class SearchController {
     @Autowired
-    private SearchRepository searchRepository;
+    private SearchService searchService;
 
-    @GetMapping("/search")         //  templates -> search 패키지 -> search.html 경로니까
+
+    @RequestMapping("/search")
     public String search() {
-        return "search/search"; // search.html로 이동
+        return "/search/search"; // search.html로 이동
     }
 
-    @GetMapping("/list")
-    public String list(@RequestParam("keyword") String keyword, Model model) {
-        List<SearchEntity> restaurants = searchRepository.findByNameContaining(keyword);
+    @RequestMapping("/list")
+    public String list(@RequestParam("name") String name, Model model) {
+        List<Search> restaurants = searchService.searchRestaurants(name);
         model.addAttribute("restaurants", restaurants);
-        return "list"; // list.html로 이동
+        return "/search/list"; // list.html로 이동
     }
-}
 
+
+    // 서버에서 검색어 처리 기능
+    @RequestMapping("suggestions")
+    @ResponseBody
+    public List<Search> suggestions(@RequestParam("name") String name) {
+        List<Search> suggestions = searchService.getSuggestions(name);
+        return suggestions;
+    }
+
+}

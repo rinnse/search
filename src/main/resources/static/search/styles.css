@@ -1,0 +1,58 @@
+/* styles.css */
+
+/* 검색 바와 검색 버튼을 가운데 정렬하고 크기 조정 */
+.search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* 수평 중앙 정렬 추가 */
+    height: 100vh; /* 뷰포트 높이에 맞춰 전체 화면을 채우도록 조정 */
+}
+
+/* 검색 바 스타일 */
+.search-bar {
+    flex-grow: 1;
+    padding: 15px; /* 검색 바의 내부 여백 설정 */
+    width: 250px;
+    height: 45px; /* 큰 크기로 조정 */
+    color: navy;
+    border: 3px solid gold; /* 테두리 추가 및 색상 설정 */
+    border-radius: 10px; /* 테두리 둥글게 */
+    margin-right: 15px; /* 검색 바 오른쪽에 */
+}
+
+/* 검색 바 포커스 스타일 */
+.search-bar:focus {
+    border-color: lightblue; /* 검색 바가 포커스를 받을 때 테두리 색상 */
+}
+
+/* 검색 버튼 스타일 (아이콘을 추가할 버튼으로 가정) */
+.search-button {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    transform: translateY(-40%); /* 수직 정렬을 위해 translateY 적용 */
+}
+
+/* 아이콘 이미지 스타일 */
+.search-icon {
+    width: 75px; /* 이미지의 너비 조정 */
+    height: auto; /* 이미지의 높이를 자동으로 조정 */
+    vertical-align: middle; /* 수직으로 가운데 정렬 */
+}
+
+
+/* 검색 버튼 스타일 (이미지가 아닐 경우)
+button[type="submit"] {
+    width: 40px;
+    height: 30px;
+    padding: 15px; /* 큰 크기로 조정 */
+/*  border: 2px solid lavender; /* 테두리 추가 및 색상 설정 */
+    /*  border-radius: 10px; 테두리 둥글게 */
+    /*    background-color: mistyrose; /* 연한 cadetblue 배경색 */
+/*  cursor: pointer;
+/* 그림자 효과 추가
+box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}  */

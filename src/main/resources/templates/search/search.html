@@ -2,15 +2,65 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="/search/styles.css">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- jQuery 라이브러리 로드 -->
     <title>검색 창 화면</title>
 </head>
 <body>
+<form method="get" action="/search/list" onsubmit="return validateSearch()">
     <div class="search-container">
-        <label>
-            <input type="text" placeholder="키워드 검색" class="search-bar">
+        <label for="name">
+            <input type="text" id="name" name="name" placeholder="키워드 검색" class="search-bar" autocomplete="off">
         </label>
-        <a href="/search/list"><img src="/img/search_icon.jpeg" alt="검색"></a>
+        <br />
+        <button type="submit">
+            <img src="/img/make.jpeg" alt="맹구 검색기" width="75" height="75" style="vertical-align: middle;" class="search-icon">
+        </button>
     </div>
+</form>
+<script>
+    $(document).ready(function() {
+        var previousKeyword = ""; // 이전 검색어를 저장할 변수 추가
+
+        $("#name").keyup(function() {
+            var name = $(this).val();
+            if (name !== previousKeyword) { // 현재 검색어와 이전 검색어가 다를 때만 요청 보내기
+                previousKeyword = name; // 현재 검색어를 이전 검색어로 설정
+
+                if (name !== '') {
+                    $.ajax({
+                        url: "search/suggestions",
+                        method: "GET",
+                        data: { keyword: name }, // 검색어로 name 사용
+                        success: function(data) {
+                            var suggestionsList = $("#suggestions");
+                            suggestionsList.empty(); // 이전 검색어 제안 내용 지우기
+
+                            data.forEach(function(suggestion) {
+                                var listItem = $("<li></li>");
+                                listItem.text(suggestion);
+                                suggestionsList.append(listItem);
+                            });
+                        }
+                    });
+                } else {
+                    $("#suggestions").empty();
+                }
+            }
+        });
+    });
+
+    function validateSearch() {
+        var name = document.getElementById("name").value;
+        if (name.trim() === "") {
+            alert("입력해주세요! =_=");
+            return false; // 검색을 취소
+        }
+        return true; // 검색 실행
+    }
+
+
+</script>
 </body>
 </html>

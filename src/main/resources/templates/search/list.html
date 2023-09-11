@@ -3,13 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <title>식당 조회 화면</title>
-    <!-- 키워드 검색 했을 때 키워드에 맞는 식당을 조회한 리스트 화면 출력 -->
+    <style>
+        /* 식당 목록 스타일 */
+        .restaurant-list {
+            max-height: 300px; /* 스크롤 영역의 최대 높이 설정 */
+            overflow-y: auto; /* 세로 스크롤을 표시하는 설정 */
+        }
+
+        /* 식당 목록 스타일 */
+        li {
+            margin-bottom: 20px; /* 각 식당 사이에 간격 추가 */
+            list-style: none; /* 번호 없애기 */
+            position: relative;
+            padding: 10px; /* 테두리와 텍스트 사이 여백 */
+            border: 2px solid gold; /* 둥근 테두리 스타일 설정 */
+            border-radius: 10px; /* 테두리 둥글게 */
+            width: 10cm; /* 가로 길이를 10cm로 설정 */
+        }
+
+        /* 구분선 스타일 */
+        .divider {
+            border-top: 1px solid #ccc; /* 구분선 스타일 설정 */
+            margin-top: 20px; /* 구분선 위 간격 추가 */
+            position: absolute; /* 절대 위치 지정 */
+            top: 1cm; /* 시작 선을 기준으로 ?cm 위에 위치 */
+            width: 90%; /* 가로 전체 너비 */
+        }
+
+        /* 카테고리 스타일 */
+        .category {
+            display: inline-block; /* 인라인 블록 요소로 설정하여 텍스트와 구분선이 같은 라인에 표시됩니다. */
+            margin-right: 10px; /* 카테고리 오른쪽 간격 추가 */
+        }
+    </style>
 </head>
 <body>
-    <!-- list  -->
-    <li th:each="">
-        <p>${search.name}</p>
-        <p>${search.category}</p>
-    </li>
+<!-- 키워드 검색 했을 때 키워드에 맞는 식당을 조회한 리스트 화면 출력 -->
+<div class="restaurant-list">
+    <ol>
+        <li th:each="restaurant : ${restaurants}">
+            <p th:text="${restaurant.name}">☆</p>
+            <div class="divider"></div>
+            <p class="category">★ <span th:text="${restaurant.category}"></span></p>
+            <!-- <p th:text="${restaurant.category}"></p> -->
+        </li>
+    </ol>
+</div>
+<div th:if="${#lists.isEmpty(restaurants)}">
+    <p>검색 결과가 없습니다</p>
+    <a href="/search/search">BACK</a>   <!-- 검색하고 다시 돌아가기 위해서 임의로 만들어둠 -->
+</div>
 </body>
 </html>
