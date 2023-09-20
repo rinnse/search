@@ -1,11 +1,9 @@
 package com.ex.search.domain;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import lombok.Getter;
-import lombok.Setter;
-import org.springframework.boot.context.properties.bind.Name;
+import lombok.Setter;;
 
 @Getter
 @Setter
@@ -13,11 +11,9 @@ import org.springframework.boot.context.properties.bind.Name;
 public class Search {
 
     @Id
-    private int id;
+    private int id;   // 식당 ID
 
-    private String name;
+    private String name;   // 식당 명
 
-    private String category;
-
-
+    private String category;   // 카테고리
 }

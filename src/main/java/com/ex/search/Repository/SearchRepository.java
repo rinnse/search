@@ -12,6 +12,8 @@ import java.util.List;
 public interface SearchRepository extends JpaRepository<Search, Integer> {
     List<Search> findByNameContaining(String keyword);
 
+    List<Search> findByCategoryContaining(String category);
+
     // 검색 창에서 연관 단어 검색하기 위한 메서드
     @Query(value = "SELECT DISTINCT s.name FROM Search s WHERE s.name LIKE %:name%")
     List<Search> findSuggestions(@Param("name") String name);
